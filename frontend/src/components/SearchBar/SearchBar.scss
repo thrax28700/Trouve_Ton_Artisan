@@ -1,0 +1,71 @@
+.searchbar {
+  width: 100%;
+  max-width: 640px;
+  margin: 0 auto;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    background: $white;
+    border: 2px solid $gray-medium;
+    border-radius: 32px;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:focus-within {
+      border-color: $blue-region;
+      box-shadow: 0 0 0 4px rgba($blue-region, .15);
+    }
+  }
+
+  &__icon {
+    padding: 0 8px 0 16px;
+    color: $gray-dark;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+  }
+
+  &__input {
+    flex: 1;
+    border: none;
+    outline: none;
+    padding: 14px 8px;
+    font-size: $font-size-base;
+    color: $text-primary;
+    background: transparent;
+
+    &::placeholder { color: $text-muted; }
+    &::-webkit-search-cancel-button { display: none; }
+  }
+
+  &__clear {
+    background: none;
+    border: none;
+    color: $gray-dark;
+    padding: 0 8px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: $transition;
+
+    &:hover { color: $danger; }
+  }
+
+  &__btn {
+    background: $blue-region;
+    color: $white;
+    border: none;
+    padding: 14px 20px;
+    font-weight: 600;
+    font-size: $font-size-sm;
+    cursor: pointer;
+    transition: $transition;
+    white-space: nowrap;
+
+    &:hover { background: $blue-hover; }
+
+    &:focus-visible {
+      outline: 3px solid $blue-dark;
+      outline-offset: -3px;
+    }
+  }
+}

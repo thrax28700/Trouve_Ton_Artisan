@@ -1,0 +1,169 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: $font-family;
+  color: $text-primary;
+  background-color: $white;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: $blue-dark;
+}
+
+a {
+  color: $blue-region;
+  text-decoration: none;
+  transition: $transition;
+  &:hover { color: $blue-hover; }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+// Accessibilité : skip link
+.skip-link {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  background: $blue-region;
+  color: $white;
+  padding: 8px 16px;
+  z-index: 9999;
+  font-weight: 600;
+  border-radius: 0 0 $radius 0;
+  transition: top 0.2s;
+
+  &:focus {
+    top: 0;
+    color: $white;
+  }
+}
+
+// Sections
+.section {
+  padding: $sp-2xl 0;
+
+  @media (min-width: $bp-lg) {
+    padding: $sp-3xl 0;
+  }
+}
+
+// Titres de section avec ligne décorative
+.section-title {
+  font-size: $font-size-2xl;
+  color: $blue-dark;
+  margin-bottom: $sp-xl;
+
+  @media (min-width: $bp-md) {
+    font-size: $font-size-3xl;
+  }
+
+  &::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 4px;
+    background: $blue-region;
+    margin-top: $sp-sm;
+    border-radius: 2px;
+  }
+
+  &.centered::after {
+    margin: $sp-sm auto 0;
+  }
+}
+
+// Loader
+.page-loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+
+  .spinner-border {
+    color: $blue-region;
+    width: 3rem;
+    height: 3rem;
+  }
+}
+
+// Badge catégorie
+.badge-categorie {
+  background-color: $blue-light;
+  color: $blue-dark;
+  font-size: $font-size-sm;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+}
+
+// Bouton principal
+.btn-region {
+  background-color: $blue-region;
+  color: $white;
+  border: none;
+  border-radius: $radius;
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  transition: $transition;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover,
+  &:focus {
+    background-color: $blue-hover;
+    color: $white;
+    transform: translateY(-2px);
+    box-shadow: $shadow-md;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $blue-region;
+    outline-offset: 3px;
+  }
+}
+
+// Bouton outline
+.btn-region-outline {
+  background-color: transparent;
+  color: $blue-region;
+  border: 2px solid $blue-region;
+  border-radius: $radius;
+  padding: 0.65rem 1.4rem;
+  font-weight: 600;
+  transition: $transition;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+
+  &:hover,
+  &:focus {
+    background-color: $blue-region;
+    color: $white;
+  }
+
+  &:focus-visible {
+    outline: 3px solid $blue-region;
+    outline-offset: 3px;
+  }
+}

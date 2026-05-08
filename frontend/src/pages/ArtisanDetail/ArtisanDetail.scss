@@ -1,0 +1,202 @@
+.detail-page {
+  background: $gray-light;
+  min-height: 60vh;
+}
+
+// Réutilise .breadcrumb-nav de ArtisanList
+.breadcrumb-nav {
+  background: $white;
+  border-bottom: 1px solid $gray-medium;
+  padding: 12px 0;
+
+  .breadcrumb {
+    margin: 0;
+    font-size: $font-size-sm;
+    a { color: $blue-region; }
+    .breadcrumb-item.active { color: $text-secondary; }
+    .breadcrumb-item + .breadcrumb-item::before { content: '›'; color: $gray-dark; }
+  }
+}
+
+// Layout 2 colonnes
+.detail-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $sp-xl;
+  padding-top: $sp-xl;
+  padding-bottom: $sp-2xl;
+  align-items: start;
+
+  @media (min-width: $bp-lg) { grid-template-columns: 1fr 380px; }
+}
+
+// Profil artisan
+.artisan-profile {
+  background: $white;
+  border-radius: $radius-xl;
+  padding: $sp-xl;
+  border: 1px solid $gray-medium;
+
+  &__header {
+    display: flex;
+    align-items: flex-start;
+    gap: $sp-lg;
+    margin-bottom: $sp-xl;
+    padding-bottom: $sp-xl;
+    border-bottom: 1px solid $gray-medium;
+  }
+
+  &__icon {
+    width: 72px;
+    height: 72px;
+    min-width: 72px;
+    background: $blue-light;
+    color: $blue-region;
+    border-radius: $radius-xl;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+  }
+
+  &__metier {
+    display: block;
+    font-size: $font-size-sm;
+    font-weight: 700;
+    color: $blue-region;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: 4px;
+  }
+
+  &__name {
+    font-size: clamp($font-size-2xl, 4vw, $font-size-3xl);
+    color: $blue-dark;
+    margin: 0;
+  }
+
+  &__info {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 0;
+    margin-bottom: $sp-xl;
+
+    @media (min-width: $bp-sm) { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  &__desc {
+    h2 {
+      font-size: $font-size-xl;
+      color: $blue-dark;
+      margin-bottom: $sp-sm;
+    }
+    p { color: $text-secondary; line-height: 1.8; }
+  }
+}
+
+.info-row {
+  display: flex;
+  gap: $sp-md;
+  padding: $sp-sm 0;
+  border-bottom: 1px solid $gray-medium;
+
+  dt {
+    min-width: 120px;
+    font-weight: 600;
+    color: $gray-dark;
+    font-size: $font-size-sm;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    i { color: $blue-region; }
+  }
+
+  dd {
+    margin: 0;
+    color: $text-primary;
+    font-weight: 500;
+
+    a {
+      color: $blue-region;
+      display: inline-flex;
+      align-items: center;
+    }
+  }
+}
+
+.badge-vedette {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: $blue-region;
+  color: $white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 6px;
+}
+
+// Carte de contact
+.contact-aside {
+  @media (min-width: $bp-lg) {
+    position: sticky;
+    top: calc(var(--header-h, 110px) + 16px);
+  }
+}
+
+.contact-card {
+  background: $white;
+  border-radius: $radius-xl;
+  padding: $sp-xl;
+  border: 1px solid $gray-medium;
+  box-shadow: $shadow-sm;
+
+  &__title {
+    font-size: $font-size-xl;
+    color: $blue-dark;
+    margin-bottom: $sp-lg;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    i { color: $blue-region; }
+  }
+
+  .form-control {
+    border-color: $gray-border;
+    border-radius: $radius;
+
+    &:focus {
+      border-color: $blue-region;
+      box-shadow: 0 0 0 3px rgba($blue-region, .15);
+    }
+  }
+
+  .form-label {
+    font-weight: 600;
+    color: $text-primary;
+    font-size: $font-size-sm;
+  }
+
+  .form-text { color: $text-muted; font-size: 0.8rem; }
+}
+
+.contact-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: $sp-sm;
+  padding: $sp-lg 0;
+
+  i {
+    font-size: 3rem;
+    color: $success;
+  }
+
+  p { margin: 0; color: $text-secondary; }
+}

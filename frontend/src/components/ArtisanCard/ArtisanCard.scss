@@ -1,0 +1,134 @@
+.artisan-card {
+  position: relative;
+  background: $white;
+  border: 1px solid $gray-medium;
+  border-radius: $radius-lg;
+  padding: $sp-lg;
+  display: flex;
+  flex-direction: column;
+  gap: $sp-md;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  height: 100%;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: $shadow-hover;
+    border-color: $blue-region;
+  }
+
+  // Variante vedette
+  &--vedette {
+    border-color: $blue-region;
+    border-width: 2px;
+
+    .artisan-card__icon { background: $blue-region; color: $white; }
+  }
+
+  &__badge {
+    position: absolute;
+    top: -10px;
+    right: 16px;
+    background: $blue-region;
+    color: $white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__icon {
+    width: 52px;
+    height: 52px;
+    background: $blue-light;
+    color: $blue-region;
+    border-radius: $radius-lg;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: $transition;
+  }
+
+  &__body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  &__metier {
+    font-size: $font-size-sm;
+    font-weight: 600;
+    color: $blue-region;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  &__name {
+    font-size: $font-size-lg;
+    font-weight: 700;
+    color: $blue-dark;
+    margin: 0;
+    line-height: 1.3;
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 4px;
+  }
+
+  &__ville,
+  &__cat {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: $font-size-sm;
+    color: $gray-dark;
+
+    i { color: $blue-region; }
+  }
+
+  &__note {
+    margin-top: 4px;
+  }
+
+  &__link {
+    margin-top: auto;
+    text-align: center;
+    text-decoration: none;
+    font-size: $font-size-sm;
+    padding: 0.6rem 1rem;
+
+    &:focus-visible {
+      outline: 3px solid $blue-region;
+      outline-offset: 3px;
+    }
+  }
+}
+
+// StarRating global styles (shared)
+.star-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: $star-color;
+  font-size: 0.9rem;
+
+  &--sm { font-size: 0.75rem; }
+  &--lg { font-size: 1.2rem; }
+
+  &__label {
+    margin-left: 6px;
+    font-size: $font-size-sm;
+    font-weight: 700;
+    color: $text-secondary;
+  }
+}

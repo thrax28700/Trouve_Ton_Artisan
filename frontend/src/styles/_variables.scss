@@ -1,0 +1,74 @@
+// ============================================================
+// Palette Région Auvergne-Rhône-Alpes
+// ============================================================
+$blue-region:    #1BA8E0;
+$blue-dark:      #2D3A4A;
+$blue-hover:     #1590C0;
+$blue-light:     #E8F5FC;
+$white:          #FFFFFF;
+$gray-light:     #F5F7FA;
+$gray-medium:    #E2E8F0;
+$gray-border:    #CBD5E1;
+$gray-dark:      #64748B;
+$text-primary:   #1A2332;
+$text-secondary: #4A5568;
+$text-muted:     #94A3B8;
+$success:        #27AE60;
+$warning:        #F39C12;
+$danger:         #E74C3C;
+$star-color:     #F59E0B;
+
+// Typography
+$font-family: 'Marianne', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+$font-size-sm:   0.875rem;
+$font-size-base: 1rem;
+$font-size-lg:   1.125rem;
+$font-size-xl:   1.25rem;
+$font-size-2xl:  1.5rem;
+$font-size-3xl:  2rem;
+$font-size-4xl:  2.5rem;
+
+// Spacing
+$sp-xs:  0.25rem;
+$sp-sm:  0.5rem;
+$sp-md:  1rem;
+$sp-lg:  1.5rem;
+$sp-xl:  2rem;
+$sp-2xl: 3rem;
+$sp-3xl: 4rem;
+
+// Borders & shadows
+$radius:    8px;
+$radius-lg: 12px;
+$radius-xl: 16px;
+
+$shadow-sm:    0 1px 3px rgba(0,0,0,.08);
+$shadow-md:    0 4px 12px rgba(0,0,0,.08);
+$shadow-lg:    0 10px 24px rgba(0,0,0,.08);
+$shadow-hover: 0 20px 40px rgba(0,0,0,.12);
+
+// Transitions
+$transition: all 0.25s ease-in-out;
+
+// Breakpoints (cohérents avec Bootstrap)
+$bp-sm:  576px;
+$bp-md:  768px;
+$bp-lg:  992px;
+$bp-xl:  1200px;
+$bp-xxl: 1400px;
+
+// CSS Custom Properties (accessibles partout sans import)
+:root {
+  --blue-region:    #{$blue-region};
+  --blue-dark:      #{$blue-dark};
+  --blue-hover:     #{$blue-hover};
+  --blue-light:     #{$blue-light};
+  --gray-light:     #{$gray-light};
+  --gray-medium:    #{$gray-medium};
+  --text-primary:   #{$text-primary};
+  --text-secondary: #{$text-secondary};
+  --star-color:     #{$star-color};
+  --shadow-md:      #{$shadow-md};
+  --radius:         #{$radius};
+  --transition:     #{$transition};
+}
