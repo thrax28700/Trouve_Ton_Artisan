@@ -263,17 +263,17 @@ Dans les paramètres du service créé à partir du dépôt :
 
 | Variable | Valeur |
 |---|---|
-| `DB_HOST` | `${{MySQL.MYSQLHOST}}` |
-| `DB_PORT` | `${{MySQL.MYSQLPORT}}` |
-| `DB_NAME` | `${{MySQL.MYSQLDATABASE}}` |
-| `DB_USER` | `${{MySQL.MYSQLUSER}}` |
-| `DB_PASSWORD` | `${{MySQL.MYSQLPASSWORD}}` |
+| `MYSQL_URL` | référencer la variable `MYSQL_URL` (ou `MYSQL_PUBLIC_URL`) du service MySQL — utiliser le sélecteur de variables de Railway (icône 🔗 dans le champ), pas une saisie manuelle, pour éviter toute faute de frappe sur le nom du service |
 | `API_KEY` | une chaîne aléatoire (`openssl rand -hex 32`) |
 | `JWT_SECRET` | une autre chaîne aléatoire |
 | `NODE_ENV` | `production` |
 | `VITE_API_KEY` | **la même valeur que `API_KEY`** (nécessaire au build du frontend) |
 
+`backend/config/database.js` détecte automatiquement `MYSQL_URL` (ou `DATABASE_URL`) et l'utilise en priorité — une seule variable à référencer, au lieu de câbler `DB_HOST`/`DB_PORT`/`DB_NAME`/`DB_USER`/`DB_PASSWORD` séparément (source d'erreur si le service MySQL n'a pas exactement le nom attendu).
+
 Ne pas définir `VITE_API_URL` : le frontend appelle alors `/api` (même origine que le backend qui le sert), donc pas besoin de CORS ni d'URL séparée.
+
+> Si le démarrage échoue avec `ECONNREFUSED 127.0.0.1:3306`, c'est que `MYSQL_URL` n'est pas définie (ou mal référencée) sur le service web — vérifier l'onglet **Variables** du service.
 
 ### 4. Déployer
 
