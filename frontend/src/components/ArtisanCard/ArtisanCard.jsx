@@ -31,7 +31,7 @@ function ArtisanCard({ artisan }) {
   return (
     <article className={`artisan-card ${en_vedette ? 'artisan-card--vedette' : ''}`}>
       {en_vedette && (
-        <span className="artisan-card__badge" aria-label="Artisan en vedette">
+        <span className="artisan-card__badge">
           <i className="bi bi-star-fill" aria-hidden="true" /> En vedette
         </span>
       )}

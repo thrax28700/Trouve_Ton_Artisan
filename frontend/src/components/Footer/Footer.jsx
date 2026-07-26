@@ -26,7 +26,7 @@ function Footer() {
 
           {/* Catégories */}
           <nav aria-label="Catégories d'artisans">
-            <h3 className="footer-heading">Catégories</h3>
+            <h2 className="footer-heading">Catégories</h2>
             <ul className="footer-links">
               <li><Link to="/artisans?categorie=alimentation"><i className="bi bi-basket" aria-hidden="true" />Alimentation</Link></li>
               <li><Link to="/artisans?categorie=batiment"><i className="bi bi-building" aria-hidden="true" />Bâtiment</Link></li>
@@ -37,7 +37,7 @@ function Footer() {
 
           {/* Navigation */}
           <nav aria-label="Navigation du site">
-            <h3 className="footer-heading">Navigation</h3>
+            <h2 className="footer-heading">Navigation</h2>
             <ul className="footer-links">
               <li><Link to="/"><i className="bi bi-house" aria-hidden="true" />Accueil</Link></li>
               <li><Link to="/artisans"><i className="bi bi-search" aria-hidden="true" />Tous les artisans</Link></li>
@@ -46,7 +46,7 @@ function Footer() {
 
           {/* Informations légales */}
           <nav aria-label="Informations légales">
-            <h3 className="footer-heading">Informations légales</h3>
+            <h2 className="footer-heading">Informations légales</h2>
             <ul className="footer-links">
               <li><Link to="/mentions-legales"><i className="bi bi-file-text" aria-hidden="true" />Mentions légales</Link></li>
               <li><Link to="/donnees-personnelles"><i className="bi bi-shield-check" aria-hidden="true" />Données personnelles</Link></li>

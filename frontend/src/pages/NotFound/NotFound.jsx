@@ -8,7 +8,7 @@ function NotFound() {
   }, []);
 
   return (
-    <main className="notfound" aria-labelledby="notfound-title">
+    <div className="notfound" role="region" aria-labelledby="notfound-title">
       <div className="container">
         <div className="notfound__inner">
           <div className="notfound__code" aria-hidden="true">404</div>
@@ -30,7 +30,7 @@ function NotFound() {
           </div>
         </div>
       </div>
-    </main>
+    </div>
   );
 }
 

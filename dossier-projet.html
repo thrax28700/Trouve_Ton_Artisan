@@ -370,7 +370,7 @@
       <tr><td>Maquettes Figma (mobile, tablette, desktop)</td><td><span class="badge badge-ok">✓ Réalisé</span></td></tr>
       <tr><td>Application web complète (frontend + API)</td><td><span class="badge badge-ok">✓ Réalisé</span></td></tr>
       <tr><td>Scripts SQL de création et d'alimentation</td><td><span class="badge badge-ok">✓ Réalisé</span></td></tr>
-      <tr><td>Dépôt GitHub public</td><td><span class="badge badge-warn">En cours</span></td></tr>
+      <tr><td>Dépôt GitHub public</td><td><span class="badge badge-ok">✓ Réalisé</span></td></tr>
       <tr><td>Site hébergé en ligne</td><td><span class="badge badge-warn">En cours</span></td></tr>
       <tr><td>Dossier PDF (ce document)</td><td><span class="badge badge-ok">✓ Réalisé</span></td></tr>
     </tbody>
@@ -820,6 +820,17 @@
       <tr><td><strong>Correction</strong></td><td>Configuration CORS stricte avec une liste blanche d'origines autorisées (<code>localhost:5173</code> en dev, domaine de production en prod). Toute autre origine est refusée.</td></tr>
     </tbody>
   </table>
+
+  <h3 class="sub-sub-title">Faille 5 — Dépendances tierces vulnérables (audit du 26/07/2026)</h3>
+  <table>
+    <thead><tr><th>Aspect</th><th>Détail</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Description</strong></td><td><code>npm audit</code> a révélé 8 vulnérabilités dans les dépendances backend : DoS sur <code>body-parser</code>, <code>brace-expansion</code>, <code>qs</code> ; falsification de logs sur <code>morgan</code> ; et 7 CVE critiques sur <code>nodemailer</code> (injection SMTP, injection CRLF, contournement de la protection anti-SSRF).</td></tr>
+      <tr><td><strong>Risque</strong></td><td>Déni de service applicatif, logs corrompus, et — pour <code>nodemailer</code> — envoi de mails vers des domaines détournés ou exécution de commandes SMTP arbitraires via le formulaire de contact.</td></tr>
+      <tr><td><strong>Correction</strong></td><td><code>npm audit fix</code> pour les 4 premières (mise à jour non-cassante). Mise à jour manuelle de <code>nodemailer</code> (6.10.1 → 9.0.3), testée sans régression sur l'envoi de messages. La dépendance <code>sqlite3</code>, inutilisée et incohérente avec l'imposition de MySQL par le cahier des charges, a été supprimée.</td></tr>
+      <tr><td><strong>Vulnérabilité résiduelle assumée</strong></td><td>Une faille modérée sur <code>uuid</code> (dépendance transitive de Sequelize) n'a pas été corrigée : la résolution automatique proposait de rétrograder Sequelize en version 3 (obsolète), ce qui aurait cassé l'ensemble de l'ORM. La faille ne s'exploite que si un buffer est fourni explicitement à une fonction <code>uuid</code>, ce que le code ne fait jamais — risque jugé nul, à réévaluer à la prochaine mise à jour majeure de Sequelize.</td></tr>
+    </tbody>
+  </table>
 </div>
 
 <!-- ════════════════════════════════════════════════════
@@ -839,7 +850,7 @@
     <tbody>
       <tr>
         <td><strong>Dépôt GitHub</strong></td>
-        <td><a href="#">[ À COMPLÉTER après publication du dépôt ]</a></td>
+        <td><a href="https://github.com/thrax28700/Trouve_Ton_Artisan">github.com/thrax28700/Trouve_Ton_Artisan</a></td>
       </tr>
       <tr>
         <td><strong>Site en ligne</strong></td>
@@ -851,20 +862,43 @@
       </tr>
       <tr>
         <td><strong>Validation W3C HTML</strong></td>
-        <td><a href="https://validator.w3.org">validator.w3.org</a> — Captures à insérer</td>
+        <td><a href="https://validator.w3.org">validator.w3.org</a> (Nu Html Checker) — <span class="badge badge-ok">0 erreur</span></td>
       </tr>
       <tr>
         <td><strong>Validation W3C CSS</strong></td>
-        <td><a href="https://jigsaw.w3.org/css-validator/">jigsaw.w3.org</a> — Captures à insérer</td>
+        <td><a href="https://jigsaw.w3.org/css-validator/">jigsaw.w3.org</a> — <span class="badge badge-ok">0 erreur</span> (validity: true)</td>
       </tr>
     </tbody>
   </table>
 
+  <h2 class="sub-title">Résultats détaillés de la validation W3C</h2>
+  <p>Le HTML final (après rendu React) a été validé page par page via l'API du Nu Html Checker :</p>
+  <table>
+    <thead><tr><th>Page</th><th>Résultat</th></tr></thead>
+    <tbody>
+      <tr><td>Accueil (<code>/</code>)</td><td><span class="badge badge-ok">0 erreur</span></td></tr>
+      <tr><td>Liste des artisans (<code>/artisans</code>)</td><td><span class="badge badge-ok">0 erreur</span></td></tr>
+      <tr><td>Fiche artisan (<code>/artisans/:id</code>)</td><td><span class="badge badge-ok">0 erreur</span></td></tr>
+      <tr><td>Page 404</td><td><span class="badge badge-ok">0 erreur</span></td></tr>
+      <tr><td>Page légale (mentions légales)</td><td><span class="badge badge-ok">0 erreur</span></td></tr>
+    </tbody>
+  </table>
+  <p>Deux erreurs réelles ont été détectées puis corrigées durant cette validation :</p>
+  <ul style="margin: 10px 0 16px 24px; line-height: 2;">
+    <li><strong><code>&lt;main&gt;</code> imbriqué</strong> — les pages Liste des artisans et 404 plaçaient un second <code>&lt;main&gt;</code> à l'intérieur du <code>&lt;main&gt;</code> global du layout (interdit par la spec HTML5, un seul <code>&lt;main&gt;</code> visible par document). Remplacé par <code>&lt;div role="region"&gt;</code>.</li>
+    <li><strong><code>aria-label</code> invalide sur <code>&lt;span&gt;</code></strong> — le badge « En vedette » portait un <code>aria-label</code> redondant avec son texte visible, interdit sur un élément de rôle générique. Attribut supprimé (le texte visible suffit pour l'accessibilité).</li>
+    <li><strong>Saut de niveau de titre</strong> — sur la page 404, le <code>&lt;h1&gt;</code> était suivi directement d'un <code>&lt;h3&gt;</code> dans le pied de page (aucun <code>&lt;h2&gt;</code> intermédiaire). Les titres de colonnes du footer sont passés de <code>&lt;h3&gt;</code> à <code>&lt;h2&gt;</code>.</li>
+  </ul>
+  <p>
+    La validation CSS du bundle compilé (<code>frontend/dist/assets/*.css</code>) ne remonte <strong>aucune erreur</strong> ; les 262 avertissements sont uniquement des préfixes vendeurs (<code>-webkit-</code>, <code>-moz-</code>, <code>-o-</code>) injectés automatiquement par l'autoprefixer de Bootstrap/Vite et des avertissements attendus sur les variables CSS (<code>--*</code>), non évaluables statiquement par le validateur — aucun n'indique une erreur de code.
+  </p>
+
   <div class="warn-box">
     <strong>⚠️ À compléter avant remise :</strong><br>
-    1. Remplacer les liens <em>[ À COMPLÉTER ]</em> ci-dessus<br>
+    1. Coller le lien de partage Figma une fois les maquettes réalisées (section 2)<br>
     2. Insérer les captures d'écran des maquettes Figma (section 2)<br>
-    3. Ajouter les captures W3C Validator (HTML &amp; CSS)
+    3. Ajouter le lien du site une fois déployé sur Railway (ligne « Site en ligne » ci-dessus)<br>
+    4. Optionnel : joindre des captures d'écran du validateur W3C en complément des résultats ci-dessus
   </div>
 
   <h2 class="sub-title">Contenu du dépôt GitHub</h2>

@@ -144,7 +144,7 @@ function ArtisanList() {
         </aside>
 
         {/* Résultats */}
-        <main aria-label="Liste des artisans">
+        <div role="region" aria-label="Liste des artisans">
           {loading && (
             <div className="page-loader">
               <div className="spinner-border" role="status">
@@ -204,7 +204,7 @@ function ArtisanList() {
               )}
             </>
           )}
-        </main>
+        </div>
       </div>
     </div>
   );

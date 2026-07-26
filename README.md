@@ -43,8 +43,8 @@ Un **espace d'administration** protégé permet de gérer l'ensemble du contenu 
 ### 1. Cloner le dépôt
 
 ```bash
-git clone https://github.com/VOTRE-COMPTE/trouve-ton-artisan.git
-cd trouve-ton-artisan
+git clone https://github.com/thrax28700/Trouve_Ton_Artisan.git
+cd Trouve_Ton_Artisan
 ```
 
 ### 2. Base de données

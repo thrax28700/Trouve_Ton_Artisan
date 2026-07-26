@@ -180,6 +180,16 @@ cd frontend
 npm audit
 ```
 
+**Audit réalisé le 26/07/2026** (`npm audit` côté backend) : 8 vulnérabilités détectées.
+
+| Dépendance | Sévérité | Action |
+|---|---|---|
+| `body-parser`, `brace-expansion`, `morgan`, `qs` | Modérée à haute | Corrigées via `npm audit fix` (mise à jour non-cassante) |
+| `nodemailer` (6.10.1 → 9.0.3) | Haute (7 CVE : injection SMTP, CRLF, SSRF) | Mise à jour manuelle vers la dernière version, testée sans régression |
+| `uuid` (transitive via `sequelize`) | Modérée | Non corrigée — `npm audit fix --force` proposait de rétrograder `sequelize` en v3 (obsolète), ce qui aurait cassé tout l'ORM. La faille exige qu'un buffer soit fourni explicitement à une fonction `uuid`, ce que le code ne fait jamais : risque résiduel jugé nul. À réévaluer à la prochaine montée de version de Sequelize. |
+
+La dépendance `sqlite3`, présente par erreur dans `package.json` mais jamais utilisée dans le code (le projet interroge exclusivement MySQL, conformément au cahier des charges), a été retirée pour réduire la surface d'attaque.
+
 ---
 
 *Document rédigé par Renaud VAILLANT — Projet "Trouve ton artisan" — Région Auvergne-Rhône-Alpes*
