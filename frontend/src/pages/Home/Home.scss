@@ -1,100 +1,301 @@
-// ========== Hero ==========
+@use "sass:color";
+@use "variables" as *;
+
+// ── Hero ──────────────────────────────────────────────────────
 .hero {
-  background: linear-gradient(135deg, $blue-dark 0%, darken($blue-dark, 8%) 50%, $blue-dark 100%);
-  color: $white;
-  padding: $sp-3xl 0 0;
   position: relative;
+  background: $blue-dark url('/hero.jpg') center center / cover no-repeat;
+  padding: $sp-3xl 0 0;
   overflow: hidden;
 
-  // Motif décoratif
   &::before {
     content: '';
     position: absolute;
     inset: 0;
-    background-image: radial-gradient(circle at 20% 80%, rgba($blue-region, .15) 0%, transparent 50%),
-                      radial-gradient(circle at 80% 20%, rgba($blue-region, .1) 0%, transparent 50%);
+    background: linear-gradient(
+      135deg,
+      rgba($blue-dark, .88) 0%,
+      rgba($blue-dark, .72) 50%,
+      rgba($blue-region, .45) 100%
+    );
     pointer-events: none;
+  }
+
+  &__overlay {
+    display: none; // réservé pour future image de fond
   }
 
   &__content {
     position: relative;
     z-index: 1;
-    max-width: 760px;
+    max-width: 780px;
     margin: 0 auto;
     text-align: center;
     padding-bottom: $sp-2xl;
   }
 
-  &__eyebrow {
+  &__logo-wrap {
+    margin-bottom: $sp-xl;
+  }
+
+  &__logo {
+    height: 90px;
+    width: auto;
+    max-width: 100%;
+    object-fit: contain;
+  }
+
+  &__region-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255,255,255,.08);
+    border: 1px solid rgba(255,255,255,.15);
+    border-radius: 30px;
+    padding: 6px 16px 6px 8px;
+    margin-bottom: $sp-lg;
     font-size: $font-size-sm;
-    font-weight: 700;
-    color: $blue-region;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    margin-bottom: $sp-md;
+    color: rgba(255,255,255,.8);
+    font-weight: 600;
+  }
+
+  &__region-emblem {
+    width: 28px;
+    height: 28px;
+    background: $blue-dark;
+    border: 1px solid rgba(255,255,255,.2);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1px;
+    flex-shrink: 0;
+
+    span {
+      font-size: 0.55rem;
+      font-weight: 900;
+      color: $white;
+
+      &:nth-child(2) { color: $blue-region; }
+    }
   }
 
   &__title {
-    font-size: clamp(2rem, 6vw, 3.5rem);
+    font-size: clamp(2.2rem, 7vw, 4rem);
     font-weight: 900;
     color: $white;
+    letter-spacing: -0.03em;
+    line-height: 1.05;
     margin-bottom: $sp-md;
-    letter-spacing: -0.02em;
   }
 
   &__subtitle {
     font-size: clamp(1rem, 2vw, 1.2rem);
-    color: rgba(255,255,255,.8);
+    color: rgba(255,255,255,.72);
     max-width: 560px;
     margin: 0 auto $sp-xl;
-    line-height: 1.7;
+    line-height: 1.75;
   }
 
   &__search {
-    margin-bottom: $sp-xl;
+    margin-bottom: $sp-lg;
+
+    // Adapte la searchbar pour le fond sombre
+    .searchbar__inner {
+      background: rgba(255,255,255,.95);
+      border-color: transparent;
+      box-shadow: 0 8px 32px rgba(0,0,0,.25);
+
+      &:focus-within {
+        box-shadow: 0 8px 32px rgba(0,0,0,.25), 0 0 0 4px rgba($blue-region, .4);
+      }
+    }
+
+    .searchbar__input {
+      color: $text-primary;
+      &::placeholder { color: $text-muted; }
+    }
+
+    .searchbar__icon { color: $gray-dark; }
   }
 
-  &__stats {
+  // Pilules raccourcis catégories
+  &__cats {
     display: flex;
-    justify-content: center;
-    gap: $sp-2xl;
     flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
   }
 
-  &__stat {
-    display: flex;
-    flex-direction: column;
+  &__cat-pill {
+    display: inline-flex;
     align-items: center;
-    gap: 4px;
+    gap: 6px;
+    background: rgba(255,255,255,.1);
+    border: 1px solid rgba(255,255,255,.2);
+    color: rgba(255,255,255,.85);
+    font-size: $font-size-sm;
+    font-weight: 600;
+    padding: 6px 14px;
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
 
-    strong {
-      font-size: $font-size-3xl;
-      font-weight: 900;
+    i { color: $blue-region; font-size: 0.85rem; }
+
+    &:hover {
+      background: $blue-region;
+      border-color: $blue-region;
       color: $white;
-      line-height: 1;
+      transform: translateY(-2px);
+      i { color: $white; }
     }
 
-    span {
-      font-size: $font-size-sm;
-      color: rgba(255,255,255,.6);
-    }
+    &:focus-visible { outline: 2px solid $white; outline-offset: 3px; }
   }
 
   &__wave {
     display: block;
     line-height: 0;
-
-    svg {
-      display: block;
-      width: 100%;
-      height: 60px;
-    }
+    svg { display: block; width: 100%; height: 55px; }
   }
 }
 
-// ========== Catégories ==========
+// ── Barre de stats ────────────────────────────────────────────
+.stats-bar {
+  background: $white;
+  border-bottom: 1px solid $gray-medium;
+  padding: $sp-lg 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: $gray-medium;
+  border-radius: $radius-lg;
+  overflow: hidden;
+
+  @media (min-width: $bp-md) { grid-template-columns: repeat(4, 1fr); }
+}
+
+.stat-item {
+  background: $white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: $sp-lg $sp-md;
+  text-align: center;
+  gap: 4px;
+
+  strong {
+    font-size: $font-size-2xl;
+    font-weight: 900;
+    color: $blue-region;
+    line-height: 1;
+  }
+
+  span {
+    font-size: $font-size-sm;
+    color: $text-secondary;
+  }
+}
+
+// ── Comment trouver mon artisan ? ───────────────────────────────
+.how-it-works {
+  &__intro {
+    max-width: 560px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: $sp-xl;
+  }
+}
+
+.text-center { text-align: center; }
+
+.steps-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $sp-lg;
+  counter-reset: step;
+
+  @media (min-width: $bp-sm) { grid-template-columns: repeat(2, 1fr); }
+  @media (min-width: $bp-lg) { grid-template-columns: repeat(4, 1fr); }
+}
+
+.step-card {
+  position: relative;
+  background: $white;
+  border: 1px solid $gray-medium;
+  border-radius: $radius-lg;
+  padding: $sp-xl $sp-lg $sp-lg;
+  text-align: center;
+  box-shadow: $shadow-sm;
+  transition: $transition;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-3px);
+  }
+
+  &__number {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: $blue-region;
+    color: $white;
+    font-weight: 800;
+    font-size: $font-size-sm;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 10px rgba($blue-region, .35);
+  }
+
+  &__icon {
+    display: block;
+    font-size: 1.75rem;
+    color: $blue-region;
+    margin: $sp-sm 0 $sp-sm;
+  }
+
+  &__title {
+    font-size: $font-size-base;
+    font-weight: 700;
+    color: $text-primary;
+    margin: 0;
+    line-height: 1.4;
+  }
+}
+
+// ── Sections communes ─────────────────────────────────────────
 .bg-light-gray { background-color: $gray-light; }
 
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $sp-md;
+  margin-bottom: $sp-xl;
+
+  .section-title { margin-bottom: 0; }
+}
+
+.section-desc {
+  color: $text-secondary;
+  font-size: $font-size-lg;
+  margin: 4px 0 0;
+}
+
+// ── Grilles ───────────────────────────────────────────────────
 .categories-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -104,7 +305,6 @@
   @media (min-width: $bp-lg) { grid-template-columns: repeat(4, 1fr); }
 }
 
-// ========== Grille artisans ==========
 .artisans-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -114,51 +314,48 @@
   @media (min-width: $bp-lg)  { grid-template-columns: repeat(3, 1fr); }
 }
 
-.section-desc {
-  color: $text-secondary;
-  margin-top: -$sp-md;
-  margin-bottom: $sp-xl;
-  font-size: $font-size-lg;
-}
-
-// ========== CTA ==========
+// ── CTA ───────────────────────────────────────────────────────
 .cta-section {
   padding: $sp-2xl 0;
   background: $gray-light;
 }
 
 .cta-box {
-  background: linear-gradient(135deg, $blue-dark, darken($blue-dark, 5%));
+  background: linear-gradient(135deg, $blue-dark 0%, color.adjust($blue-dark, $lightness: -12%) 100%);
   border-radius: $radius-xl;
   padding: $sp-2xl $sp-xl;
-  text-align: center;
-  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: $sp-xl;
+  flex-wrap: wrap;
   position: relative;
   overflow: hidden;
 
-  &::before {
+  &::after {
     content: '';
     position: absolute;
-    right: -60px;
-    top: -60px;
-    width: 200px;
-    height: 200px;
-    background: rgba($blue-region, .15);
+    right: -80px;
+    top: -80px;
+    width: 260px;
+    height: 260px;
+    background: rgba($blue-region, .08);
     border-radius: 50%;
     pointer-events: none;
   }
 
-  h2 {
-    color: $white;
-    font-size: $font-size-2xl;
-    margin-bottom: $sp-sm;
+  &__text {
+    position: relative;
+    z-index: 1;
+
+    h2 { color: $white; font-size: $font-size-2xl; margin: 0 0 8px; }
+    p  { color: rgba(255,255,255,.65); margin: 0; max-width: 440px; }
   }
 
-  p {
-    color: rgba(255,255,255,.75);
-    margin-bottom: $sp-xl;
-    max-width: 480px;
-    margin-left: auto;
-    margin-right: auto;
+  &__btn {
+    position: relative;
+    z-index: 1;
+    white-space: nowrap;
+    flex-shrink: 0;
   }
 }

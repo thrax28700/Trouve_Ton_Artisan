@@ -1,4 +1,4 @@
-const { Categorie, Artisan } = require('../models');
+const { Categorie } = require('../models');
 
 const getAll = async (req, res, next) => {
   try {

@@ -2,16 +2,31 @@ import { Link } from 'react-router-dom';
 import StarRating from '../StarRating/StarRating';
 import './ArtisanCard.scss';
 
-const CATEGORY_ICONS = {
-  alimentation: 'bi-basket',
-  batiment:     'bi-building',
-  fabrication:  'bi-tools',
-  services:     'bi-person-badge'
+const METIER_ICONS = {
+  'Boucher':      '/butcher.png',
+  'Boulanger':    '/baker.png',
+  'Chocolatier':  '/chocolate.png',
+  'Traiteur':     '/catering.png',
+  'Chauffagiste': '/engineer.png',
+  'Électricien':  '/electrician.png',
+  'Menuisier':    '/carpenter.png',
+  'Plombier':     '/plumber.png',
+  'Bijoutier':    '/jeweler.png',
+  'Couturier':    '/dressmaker.png',
+  'Couturière':   '/dressmaker.png',
+  'Ferronnier':   '/ironworker.png',
+  'Coiffeur':     '/hairdresser.png',
+  'Coiffeuse':    '/hairdresser.png',
+  'Fleuriste':    '/florist.png',
+  'Toiletteur':   '/dog.png',
+  'Toiletteuse':  '/dog.png',
+  'Webdesign':    '/webdisgner.png',
+  'Webdesigner':  '/webdisgner.png',
 };
 
 function ArtisanCard({ artisan }) {
   const { id, nom, metier, ville, note, en_vedette, categorie } = artisan;
-  const icon = CATEGORY_ICONS[categorie?.slug] || 'bi-person-workspace';
+  const iconPng = METIER_ICONS[metier];
 
   return (
     <article className={`artisan-card ${en_vedette ? 'artisan-card--vedette' : ''}`}>
@@ -22,7 +37,10 @@ function ArtisanCard({ artisan }) {
       )}
 
       <div className="artisan-card__icon" aria-hidden="true">
-        <i className={`bi ${icon}`} />
+        {iconPng
+          ? <img src={iconPng} alt={metier} className="artisan-card__icon-img" />
+          : <i className="bi bi-person-workspace" />
+        }
       </div>
 
       <div className="artisan-card__body">
@@ -36,7 +54,6 @@ function ArtisanCard({ artisan }) {
           </span>
           {categorie && (
             <span className="artisan-card__cat">
-              <i className={`bi ${icon}`} aria-hidden="true" />
               {categorie.nom}
             </span>
           )}

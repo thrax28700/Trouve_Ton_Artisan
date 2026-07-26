@@ -1,45 +1,72 @@
+@use "sass:color";
+@use "variables" as *;
+
 .site-footer {
   background-color: $blue-dark;
   color: rgba(255,255,255,.8);
-  padding: $sp-2xl 0 0;
+  position: relative;
+  overflow: hidden;
   margin-top: auto;
+}
+
+// Filigrane "ARA" transparent en arrière-plan
+.footer-watermark {
+  position: absolute;
+  right: -40px;
+  bottom: -30px;
+  font-size: 14rem;
+  font-weight: 900;
+  color: rgba(255,255,255,.03);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+}
+
+.footer-inner {
+  position: relative;
+  z-index: 1;
+  padding-top: $sp-2xl;
+  padding-bottom: $sp-xl;
 }
 
 .footer-grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: $sp-xl;
-  padding-bottom: $sp-xl;
 
   @media (min-width: $bp-sm)  { grid-template-columns: repeat(2, 1fr); }
   @media (min-width: $bp-lg)  { grid-template-columns: 2fr 1fr 1fr 1fr; }
 }
 
+// Logo footer
+.footer-logo-img {
+  height: 44px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  margin-bottom: $sp-md;
+  display: block;
+}
+
 .footer-brand {
-  &__title {
-    font-size: $font-size-xl;
-    font-weight: 800;
-    color: $white;
-    margin: 0;
+  &__logo {
+    margin-bottom: $sp-md;
   }
-  &__sub {
-    font-size: $font-size-sm;
-    color: $blue-region;
-    font-weight: 600;
-    margin: 4px 0 12px;
-  }
+
   &__desc {
     font-size: $font-size-sm;
-    color: rgba(255,255,255,.6);
-    line-height: 1.6;
+    color: rgba(255,255,255,.5);
+    line-height: 1.7;
     margin: 0;
   }
 }
 
 .footer-heading {
-  font-size: $font-size-sm;
+  font-size: 0.7rem;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.1em;
   color: $blue-region;
   font-weight: 700;
   margin-bottom: $sp-md;
@@ -49,38 +76,70 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 
-  li {
-    margin-bottom: 8px;
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255,255,255,.65);
+    font-size: $font-size-sm;
+    transition: color 0.2s ease;
+    text-decoration: none;
 
-    a {
-      color: rgba(255,255,255,.7);
-      font-size: $font-size-sm;
-      transition: $transition;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
+    i { color: $blue-region; font-size: 0.8rem; }
 
-      &:hover { color: $white; }
-    }
+    &:hover { color: $white; }
+    &:focus-visible { outline: 2px solid $blue-region; outline-offset: 3px; border-radius: 2px; }
   }
 }
 
 .footer-region-text {
   font-size: $font-size-sm;
-  color: rgba(255,255,255,.6);
-  line-height: 1.6;
-  margin: 0;
+  color: rgba(255,255,255,.5);
+  line-height: 1.7;
+  margin: 0 0 $sp-sm;
 }
 
+.footer-region-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $font-size-sm;
+  color: $blue-region;
+  font-weight: 600;
+  text-decoration: none;
+  transition: color 0.2s ease;
+
+  &:hover { color: color.adjust($blue-region, $lightness: 15%); }
+  &:focus-visible { outline: 2px solid $blue-region; outline-offset: 3px; border-radius: 2px; }
+}
+
+// Barre du bas
 .footer-bottom {
-  border-top: 1px solid rgba(255,255,255,.1);
+  position: relative;
+  z-index: 1;
+  border-top: 1px solid rgba(255,255,255,.08);
   padding: $sp-md 0;
-  text-align: center;
+
+  .container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
 
   p {
-    font-size: $font-size-sm;
-    color: rgba(255,255,255,.4);
+    font-size: 0.78rem;
+    color: rgba(255,255,255,.35);
     margin: 0;
+  }
+
+  &__mention {
+    font-size: 0.72rem !important;
+    color: rgba(255,255,255,.2) !important;
   }
 }

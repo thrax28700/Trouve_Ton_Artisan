@@ -1,3 +1,5 @@
+@use "variables" as *;
+
 .artisan-card {
   position: relative;
   background: $white;
@@ -42,10 +44,9 @@
   }
 
   &__icon {
-    width: 52px;
-    height: 52px;
+    width: 64px;
+    height: 64px;
     background: $blue-light;
-    color: $blue-region;
     border-radius: $radius-lg;
     display: flex;
     align-items: center;
@@ -53,6 +54,14 @@
     font-size: 1.5rem;
     flex-shrink: 0;
     transition: $transition;
+    color: $blue-region;
+    padding: 6px;
+  }
+
+  &__icon-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
 
   &__body {

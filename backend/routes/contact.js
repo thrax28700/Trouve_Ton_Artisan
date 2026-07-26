@@ -21,6 +21,11 @@ const validateContact = [
     .isEmail().withMessage("L'adresse email est invalide.")
     .normalizeEmail()
     .isLength({ max: 150 }),
+  body('objet')
+    .trim()
+    .notEmpty().withMessage("L'objet est requis.")
+    .isLength({ min: 2, max: 200 }).withMessage("L'objet doit contenir entre 2 et 200 caractères.")
+    .escape(),
   body('message')
     .trim()
     .notEmpty().withMessage('Le message est requis.')

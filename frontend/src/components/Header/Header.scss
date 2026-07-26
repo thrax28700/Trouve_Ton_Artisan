@@ -1,61 +1,69 @@
+@use "variables" as *;
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 8px rgba(0,0,0,.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
 }
 
-// Bande supérieure : logo + recherche
-.header-top {
-  background-color: $blue-dark;
-  padding: 12px 0;
+// ── Barre blanche identité ────────────────────────────────────
+.header-identity {
+  background: $white;
+  border-bottom: 4px solid $blue-region;
 
   &__inner {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
+    gap: 24px;
+    min-height: 110px;
+    padding: 8px 0;
+  }
+
+  &__right {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-shrink: 0;
   }
 }
 
-.site-header__logo {
+.header-identity__logo {
   display: flex;
-  flex-direction: column;
-  line-height: 1.2;
+  align-items: center;
+  flex-shrink: 0;
   text-decoration: none;
-
-  .logo-title {
-    font-size: clamp(1.1rem, 3vw, 1.5rem);
-    font-weight: 800;
-    color: $white;
-    letter-spacing: -0.02em;
-  }
-
-  .logo-sub {
-    font-size: 0.75rem;
-    color: $blue-region;
-    font-weight: 600;
-  }
-
-  &:hover .logo-title,
-  &:focus .logo-title { color: $blue-region; }
+  &:focus-visible { outline: 3px solid $blue-region; outline-offset: 4px; border-radius: 4px; }
 }
 
-// Barre de recherche
+.logo-img {
+  height: 160px;
+  width: auto;
+  max-width: 520px;
+  object-fit: contain;
+  display: block;
+
+  @media (max-width: $bp-md) { height: 90px; max-width: 260px; }
+  @media (max-width: $bp-sm) { height: 64px; max-width: 180px; }
+}
+
+// ── Recherche header ──────────────────────────────────────────
 .header-search {
   display: flex;
   align-items: center;
-  background: rgba(255,255,255,.1);
-  border: 1px solid rgba(255,255,255,.2);
-  border-radius: 24px;
+  border: 1.5px solid $gray-medium;
+  border-radius: 4px;
   overflow: hidden;
   flex: 1;
-  max-width: 380px;
-  transition: $transition;
+  max-width: 300px;
+  background: $gray-light;
+  transition: border-color .2s, box-shadow .2s;
 
   &:focus-within {
-    background: rgba(255,255,255,.15);
     border-color: $blue-region;
+    box-shadow: 0 0 0 3px rgba($blue-region, .12);
+    background: $white;
   }
 
   &__input {
@@ -63,11 +71,10 @@
     background: transparent;
     border: none;
     outline: none;
-    color: $white;
-    padding: 8px 16px;
+    color: $text-primary;
+    padding: 9px 14px;
     font-size: $font-size-sm;
-
-    &::placeholder { color: rgba(255,255,255,.5); }
+    &::placeholder { color: $text-muted; }
     &::-webkit-search-cancel-button { display: none; }
   }
 
@@ -75,89 +82,214 @@
     background: $blue-region;
     border: none;
     color: $white;
-    padding: 8px 14px;
+    padding: 9px 14px;
     cursor: pointer;
-    transition: $transition;
-
+    transition: background .2s;
     &:hover { background: $blue-hover; }
   }
 }
 
-// Navigation par catégories
+// ── Navigation bleue foncée ───────────────────────────────────
 .header-nav {
-  background-color: $blue-region;
+  background: $blue-dark;
+  border-top: 3px solid $blue-region;
 
-  // Mobile : masqué par défaut
-  @media (max-width: ($bp-lg - 1px)) {
+  @media (max-width: #{$bp-lg - 1px}) {
     display: none;
-    padding-bottom: 16px;
-
+    border-top: none;
     &.is-open { display: block; }
   }
 
   &__list {
     display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 0;
+    align-items: stretch;
     list-style: none;
     margin: 0;
     padding: 0;
+    flex-wrap: wrap;
 
-    @media (max-width: ($bp-lg - 1px)) {
+    @media (max-width: #{$bp-lg - 1px}) {
       flex-direction: column;
-      align-items: stretch;
-    }
-
-    a {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 12px 16px;
-      color: rgba(255,255,255,.9);
-      font-weight: 600;
-      font-size: $font-size-sm;
-      text-decoration: none;
-      white-space: nowrap;
-      transition: $transition;
-      border-bottom: 3px solid transparent;
-
-      @media (max-width: ($bp-lg - 1px)) {
-        border-bottom: 1px solid rgba(255,255,255,.1);
-        padding: 14px 16px;
-      }
-
-      &:hover {
-        color: $white;
-        background: rgba(255,255,255,.1);
-        border-bottom-color: $white;
-      }
-
-      &.active {
-        color: $white;
-        border-bottom-color: $white;
-        background: rgba(255,255,255,.15);
-      }
     }
   }
 }
 
-// Hamburger
+// ── Item de nav standard ──────────────────────────────────────
+.nav-item {
+  position: relative;
+  display: flex;
+
+  > a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 13px 17px;
+    color: rgba(255,255,255,.82);
+    font-size: $font-size-sm;
+    font-weight: 600;
+    text-decoration: none;
+    border-bottom: 3px solid transparent;
+    transition: all .18s ease;
+    white-space: nowrap;
+
+    @media (max-width: #{$bp-lg - 1px}) {
+      border-bottom: 1px solid rgba(255,255,255,.07);
+      border-left: 3px solid transparent;
+      padding: 14px 20px;
+    }
+
+    i { font-size: .8rem; opacity: .75; }
+
+    &:hover { color: $white; background: rgba(255,255,255,.07); border-bottom-color: $blue-region; }
+    &.active { color: $white; background: rgba($blue-region,.2); border-bottom-color: $blue-region; }
+  }
+}
+
+// ── Item avec dropdown ────────────────────────────────────────
+.nav-item--dropdown {
+  &.is-open .nav-chevron { transform: rotate(180deg); }
+
+  &:hover > .nav-dropdown,
+  &.is-open > .nav-dropdown { display: block; }
+}
+
+.nav-dropdown-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 13px 17px;
+  color: rgba(255,255,255,.82);
+  font-size: $font-size-sm;
+  font-weight: 600;
+  background: none;
+  border: none;
+  border-bottom: 3px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all .18s ease;
+  width: 100%;
+
+  @media (max-width: #{$bp-lg - 1px}) {
+    border-bottom: 1px solid rgba(255,255,255,.07);
+    border-left: 3px solid transparent;
+    padding: 14px 20px;
+  }
+
+  i:first-child { font-size: .8rem; opacity: .75; }
+
+  &:hover,
+  .nav-item--dropdown.is-open & {
+    color: $white;
+    background: rgba(255,255,255,.07);
+    border-bottom-color: $blue-region;
+  }
+
+  &:focus-visible { outline: 2px solid $blue-region; outline-offset: -2px; }
+}
+
+.nav-chevron {
+  margin-left: 2px;
+  font-size: .7rem !important;
+  opacity: .7;
+  transition: transform .2s ease;
+}
+
+// Panneau dropdown
+.nav-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  min-width: 220px;
+  background: $white;
+  border: 1px solid $gray-medium;
+  border-top: 3px solid $blue-region;
+  border-radius: 0 0 $radius $radius;
+  box-shadow: $shadow-lg;
+  z-index: 200;
+  list-style: none;
+  margin: 0;
+  padding: 6px 0;
+  animation: fadeDown .15s ease;
+
+  @media (max-width: #{$bp-lg - 1px}) {
+    position: static;
+    border: none;
+    border-top: 1px solid rgba(255,255,255,.1);
+    background: rgba(0,0,0,.2);
+    border-radius: 0;
+    box-shadow: none;
+    padding: 0;
+    display: block;
+    animation: none;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 16px;
+    color: $text-primary;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    text-decoration: none;
+    transition: all .15s ease;
+
+    @media (max-width: #{$bp-lg - 1px}) {
+      color: rgba(255,255,255,.75);
+      padding: 11px 32px;
+    }
+
+    i { color: $blue-region; font-size: .8rem; }
+
+    &:hover {
+      background: $blue-light;
+      color: $blue-dark;
+      padding-left: 20px;
+
+      @media (max-width: #{$bp-lg - 1px}) {
+        background: rgba(255,255,255,.07);
+        color: $white;
+        padding-left: 36px;
+      }
+    }
+
+    &:focus-visible { outline: 2px solid $blue-region; outline-offset: -2px; }
+  }
+
+  &__divider {
+    height: 1px;
+    background: $gray-medium;
+    margin: 4px 0;
+
+    @media (max-width: #{$bp-lg - 1px}) {
+      background: rgba(255,255,255,.1);
+    }
+  }
+}
+
+@keyframes fadeDown {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+// ── Hamburger ─────────────────────────────────────────────────
 .hamburger {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  background: none;
+  background: $blue-dark;
   border: none;
   cursor: pointer;
-  padding: 8px;
-  border-radius: $radius;
+  padding: 9px 10px;
+  border-radius: 4px;
   transition: $transition;
+  flex-shrink: 0;
 
   span {
     display: block;
-    width: 24px;
+    width: 22px;
     height: 2px;
     background: $white;
     border-radius: 2px;
@@ -171,8 +303,5 @@
     span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
   }
 
-  &:focus-visible {
-    outline: 2px solid $blue-region;
-    outline-offset: 2px;
-  }
+  &:focus-visible { outline: 2px solid $blue-region; outline-offset: 2px; }
 }

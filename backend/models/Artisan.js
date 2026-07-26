@@ -49,6 +49,10 @@ const Artisan = sequelize.define('Artisan', {
   categorie_id: {
     type: DataTypes.INTEGER.UNSIGNED,
     allowNull: false
+  },
+  specialite_id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: true
   }
 }, {
   tableName: 'artisans',

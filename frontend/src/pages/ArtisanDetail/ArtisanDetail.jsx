@@ -17,7 +17,7 @@ function ArtisanDetail() {
   const [artisan, setArtisan]     = useState(null);
   const [loading, setLoading]     = useState(true);
   const [error, setError]         = useState('');
-  const [form, setForm]           = useState({ nom: '', email: '', message: '' });
+  const [form, setForm]           = useState({ nom: '', email: '', objet: '', message: '' });
   const [formErrors, setFormErrors] = useState({});
   const [sending, setSending]     = useState(false);
   const [sent, setSent]           = useState(false);
@@ -39,10 +39,11 @@ function ArtisanDetail() {
 
   const validate = () => {
     const errs = {};
-    if (!form.nom.trim() || form.nom.trim().length < 2)      errs.nom     = 'Veuillez saisir votre nom (min. 2 caractères).';
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))      errs.email   = 'Adresse email invalide.';
+    if (!form.nom.trim() || form.nom.trim().length < 2)         errs.nom     = 'Veuillez saisir votre nom (min. 2 caractères).';
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email))         errs.email   = 'Adresse email invalide.';
+    if (!form.objet.trim() || form.objet.trim().length < 2)     errs.objet   = "L'objet est requis (min. 2 caractères).";
     if (!form.message.trim() || form.message.trim().length < 10) errs.message = 'Message trop court (min. 10 caractères).';
-    if (form.message.trim().length > 1000)                   errs.message = 'Message trop long (max. 1000 caractères).';
+    if (form.message.trim().length > 1000)                      errs.message = 'Message trop long (max. 1000 caractères).';
     return errs;
   };
 
@@ -62,7 +63,7 @@ function ArtisanDetail() {
     try {
       await sendContact({ ...form, artisan_id: artisan.id });
       setSent(true);
-      setForm({ nom: '', email: '', message: '' });
+      setForm({ nom: '', email: '', objet: '', message: '' });
     } catch (err) {
       setSendError(err.message);
     } finally {
@@ -225,6 +226,26 @@ function ArtisanDetail() {
                   />
                   {formErrors.email && (
                     <div id="email-error" className="invalid-feedback">{formErrors.email}</div>
+                  )}
+                </div>
+
+                <div className="mb-3">
+                  <label htmlFor="contact-objet" className="form-label">
+                    Objet <span aria-hidden="true" className="text-danger">*</span>
+                  </label>
+                  <input
+                    id="contact-objet"
+                    name="objet"
+                    type="text"
+                    className={`form-control ${formErrors.objet ? 'is-invalid' : ''}`}
+                    value={form.objet}
+                    onChange={handleChange}
+                    required
+                    aria-required="true"
+                    aria-describedby={formErrors.objet ? 'objet-error' : undefined}
+                  />
+                  {formErrors.objet && (
+                    <div id="objet-error" className="invalid-feedback">{formErrors.objet}</div>
                   )}
                 </div>
 

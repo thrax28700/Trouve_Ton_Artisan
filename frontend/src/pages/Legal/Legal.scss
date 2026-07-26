@@ -1,0 +1,82 @@
+@use "../../styles/variables" as *;
+
+.legal-page {
+  padding: 2rem 0 4rem;
+  min-height: 60vh;
+
+  .legal-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: $blue-region;
+    margin-bottom: 0.25rem;
+  }
+
+  .legal-updated {
+    color: $text-secondary;
+    font-size: 0.875rem;
+    margin-bottom: 2rem;
+  }
+
+  .legal-section {
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid $gray-medium;
+
+    &:last-of-type { border-bottom: none; }
+
+    h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: 0.75rem;
+    }
+
+    p, li { line-height: 1.75; color: $text-secondary; }
+
+    ul { padding-left: 1.5rem; margin-bottom: 0.75rem; }
+
+    code {
+      background: $blue-light;
+      padding: 0.1em 0.4em;
+      border-radius: 4px;
+      font-size: 0.875em;
+      color: $blue-region;
+    }
+
+    a { color: $blue-region; text-decoration: underline; }
+  }
+
+  .legal-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+    font-size: 0.9rem;
+
+    th, td {
+      padding: 0.6rem 0.75rem;
+      border: 1px solid $gray-medium;
+      text-align: left;
+    }
+
+    th {
+      background: $gray-light;
+      font-weight: 600;
+      color: $text-primary;
+    }
+  }
+
+  .legal-nav {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+
+    a {
+      color: $blue-region;
+      text-decoration: none;
+      font-weight: 500;
+
+      &:hover { text-decoration: underline; }
+    }
+  }
+}

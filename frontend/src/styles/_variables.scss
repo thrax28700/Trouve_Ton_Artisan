@@ -1,25 +1,27 @@
 // ============================================================
 // Palette Région Auvergne-Rhône-Alpes
+// Couleurs officielles imposées par le cahier des charges :
+// #f1f8fc · #0074c7 · #00497c · #384050 · #cd2c2e · #82b864
 // ============================================================
-$blue-region:    #1BA8E0;
-$blue-dark:      #2D3A4A;
-$blue-hover:     #1590C0;
-$blue-light:     #E8F5FC;
+$blue-region:    #0074C7; // bleu principal — actions, liens, accents
+$blue-dark:      #00497C; // bleu foncé — nav, fonds sombres, hover
+$blue-hover:     #00385F; // variante hover du bleu foncé
+$blue-light:     #F1F8FC; // fond clair
 $white:          #FFFFFF;
-$gray-light:     #F5F7FA;
+$gray-light:     #F1F8FC;
 $gray-medium:    #E2E8F0;
 $gray-border:    #CBD5E1;
 $gray-dark:      #64748B;
-$text-primary:   #1A2332;
-$text-secondary: #4A5568;
+$text-primary:   #384050; // gris anthracite — texte principal
+$text-secondary: #5B6472;
 $text-muted:     #94A3B8;
-$success:        #27AE60;
+$success:        #82B864; // vert
 $warning:        #F39C12;
-$danger:         #E74C3C;
+$danger:         #CD2C2E; // rouge
 $star-color:     #F59E0B;
 
 // Typography
-$font-family: 'Marianne', 'Source Sans Pro', system-ui, -apple-system, sans-serif;
+$font-family: 'Graphik', 'Arial', sans-serif;
 $font-size-sm:   0.875rem;
 $font-size-base: 1rem;
 $font-size-lg:   1.125rem;

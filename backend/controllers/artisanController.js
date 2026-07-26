@@ -27,7 +27,7 @@ const getAll = async (req, res, next) => {
       model: Categorie,
       as: 'categorie',
       attributes: ['id', 'nom', 'slug', 'icone'],
-      ...(Object.keys(categorieWhere).length ? { where: categorieWhere } : {})
+      ...(Object.keys(categorieWhere).length ? { where: categorieWhere, required: true } : { required: false })
     };
 
     const { count, rows } = await Artisan.findAndCountAll({
@@ -36,7 +36,8 @@ const getAll = async (req, res, next) => {
       limit: safeLimit,
       offset,
       order: [['note', 'DESC'], ['nom', 'ASC']],
-      attributes: { exclude: ['email'] }
+      attributes: { exclude: ['email'] },
+      distinct: true
     });
 
     res.json({
@@ -56,7 +57,8 @@ const getById = async (req, res, next) => {
     if (!/^\d+$/.test(id)) return res.status(400).json({ error: 'ID invalide' });
 
     const artisan = await Artisan.findByPk(parseInt(id), {
-      include: [{ model: Categorie, as: 'categorie', attributes: ['id', 'nom', 'slug', 'icone'] }]
+      include: [{ model: Categorie, as: 'categorie', attributes: ['id', 'nom', 'slug', 'icone'] }],
+      attributes: { exclude: ['email'] }
     });
 
     if (!artisan) return res.status(404).json({ error: 'Artisan non trouvé' });
