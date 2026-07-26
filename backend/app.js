@@ -22,12 +22,16 @@ app.use(helmet());
 app.use(xssClean());
 app.use(hpp());
 
+// CORS scopé à /api uniquement : en déploiement mono-service, le frontend est servi par
+// ce même serveur (même origine, pas de CORS nécessaire) — mais le tag <script type="module"
+// crossorigin> généré par Vite envoie quand même un Origin, donc un CORS global bloquerait
+// les fichiers statiques du frontend eux-mêmes si l'origine n'est pas dans la liste blanche.
 const allowedOrigins = [
   process.env.FRONTEND_URL || 'http://localhost:5173',
   'http://localhost:5173',
   'http://localhost:4173'
 ];
-app.use(cors({
+app.use('/api', cors({
   origin: (origin, cb) => {
     if (!origin || allowedOrigins.includes(origin)) return cb(null, true);
     cb(new Error('CORS non autorisé'));
