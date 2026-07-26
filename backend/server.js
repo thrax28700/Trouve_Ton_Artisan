@@ -13,7 +13,11 @@ async function start() {
   try {
     await sequelize.authenticate();
     console.log('✅ Connexion à la base de données établie.');
-    await sequelize.sync({ alter: true });
+    // Le schéma est défini par database/create.sql (source de vérité). `sync()` sans
+    // `alter: true` crée les tables manquantes sans jamais toucher aux tables existantes :
+    // `alter: true` réexécute un ALTER TABLE à chaque démarrage et finit par empiler des
+    // contraintes UNIQUE en double jusqu'à dépasser la limite MySQL de 64 clés par table.
+    await sequelize.sync();
     console.log('✅ Modèles synchronisés.');
     await seed();
     app.listen(PORT, () => {

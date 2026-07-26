@@ -242,20 +242,42 @@ Trouve_Ton_Artisan/
 
 ---
 
-## Déploiement
+## Déploiement (Railway — service unique)
 
-| Service | Usage |
-|---------|-------|
-| **Railway** | Backend Node.js + MySQL |
-| **PlanetScale** | Base de données MySQL managée |
-| **Vercel** / **Netlify** | Frontend React (build statique) |
-| **Render** | Alternative gratuite pour le backend |
+En production, le backend sert directement le build du frontend (fichiers statiques + route de repli SPA dans `backend/app.js`). Un seul service Railway suffit donc pour tout le site.
 
-```bash
-# Build de production (frontend)
-cd frontend && npm run build
-# → Le dossier dist/ est prêt à déployer
-```
+### 1. Créer le projet
+
+1. Sur [railway.app](https://railway.app), **New Project → Deploy from GitHub repo**, sélectionner ce dépôt.
+2. Ajouter une base de données : bouton **+ New → Database → MySQL** dans le même projet.
+
+### 2. Configurer le service web
+
+Dans les paramètres du service créé à partir du dépôt :
+
+- **Build command** : `npm run build` (exécute `install:all` puis le build Vite — défini à la racine du repo)
+- **Start command** : `npm start` (démarre `backend/server.js`, qui sert aussi le frontend buildé)
+- **Root directory** : laisser vide (racine du monorepo)
+
+### 3. Variables d'environnement du service web
+
+| Variable | Valeur |
+|---|---|
+| `DB_HOST` | `${{MySQL.MYSQLHOST}}` |
+| `DB_PORT` | `${{MySQL.MYSQLPORT}}` |
+| `DB_NAME` | `${{MySQL.MYSQLDATABASE}}` |
+| `DB_USER` | `${{MySQL.MYSQLUSER}}` |
+| `DB_PASSWORD` | `${{MySQL.MYSQLPASSWORD}}` |
+| `API_KEY` | une chaîne aléatoire (`openssl rand -hex 32`) |
+| `JWT_SECRET` | une autre chaîne aléatoire |
+| `NODE_ENV` | `production` |
+| `VITE_API_KEY` | **la même valeur que `API_KEY`** (nécessaire au build du frontend) |
+
+Ne pas définir `VITE_API_URL` : le frontend appelle alors `/api` (même origine que le backend qui le sert), donc pas besoin de CORS ni d'URL séparée.
+
+### 4. Déployer
+
+Railway build et démarre automatiquement à chaque `git push`. Une fois en ligne, l'URL fournie par Railway donne accès au site complet (front + API sur le même domaine).
 
 ---
 

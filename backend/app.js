@@ -1,4 +1,6 @@
 require('dotenv').config();
+const path = require('path');
+const fs = require('fs');
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
@@ -63,6 +65,15 @@ app.use('/api/admin', adminRoutes);
 app.get('/api/health', (req, res) => {
   res.json({ status: 'OK', service: 'Trouve ton artisan API', timestamp: new Date().toISOString() });
 });
+
+// Sert le frontend buildé (déploiement mono-service : le backend sert aussi le React statique)
+const frontendDist = path.join(__dirname, '../frontend/dist');
+if (fs.existsSync(frontendDist)) {
+  app.use(express.static(frontendDist));
+  app.get(/^(?!\/api).*/, (req, res) => {
+    res.sendFile(path.join(frontendDist, 'index.html'));
+  });
+}
 
 app.use((req, res) => res.status(404).json({ error: 'Route non trouvée' }));
 app.use(errorHandler);
