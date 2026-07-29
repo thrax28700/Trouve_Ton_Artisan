@@ -26,7 +26,7 @@
   /* ── En-tête & pied-de-page (print) ───────────────── */
   @page {
     size: A4;
-    margin: 22mm 18mm 28mm 18mm;
+    margin: 16mm 18mm 18mm 18mm;
     @top-center {
       content: "Trouve ton artisan — Région Auvergne-Rhône-Alpes";
       font-size: 8pt;
@@ -100,23 +100,23 @@
   .toc-sub li { margin-bottom: 2px; font-size: 10pt; color: var(--gray); padding: 1px 0; border-bottom: 1px dotted #eee; }
 
   /* ── Sections principales ──────────────────────────── */
-  .section { padding: 32px 0 24px; }
+  .section { padding: 20px 0 14px; }
   .section + .section { border-top: 1px solid var(--border); }
 
   h1.section-title {
-    font-size: 18pt;
+    font-size: 17pt;
     color: var(--blue-dark);
     border-left: 5px solid var(--blue);
     padding-left: 14px;
-    margin-bottom: 24px;
+    margin-bottom: 14px;
     break-after: avoid;
     page-break-after: avoid;
   }
   h2.sub-title {
-    font-size: 13pt;
+    font-size: 12.5pt;
     color: var(--blue-dark);
-    margin: 24px 0 12px;
-    padding-bottom: 6px;
+    margin: 14px 0 8px;
+    padding-bottom: 5px;
     border-bottom: 1px solid var(--border);
     break-after: avoid;
     page-break-after: avoid;
@@ -124,20 +124,20 @@
   h3.sub-sub-title {
     font-size: 11pt;
     color: var(--blue);
-    margin: 16px 0 8px;
+    margin: 10px 0 6px;
     font-weight: 700;
     break-after: avoid;
     page-break-after: avoid;
   }
 
-  p { margin-bottom: 10px; }
+  p { margin-bottom: 7px; }
 
   /* ── Tableaux ──────────────────────────────────────── */
-  table { width: 100%; border-collapse: collapse; margin: 16px 0; font-size: 10pt; }
+  table { width: 100%; border-collapse: collapse; margin: 10px 0; font-size: 9.5pt; }
   thead { display: table-header-group; }
   tr { break-inside: avoid; page-break-inside: avoid; }
-  th { background: var(--blue-dark); color: white; padding: 8px 12px; text-align: left; font-weight: 600; }
-  td { padding: 7px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  th { background: var(--blue-dark); color: white; padding: 6px 12px; text-align: left; font-weight: 600; }
+  td { padding: 5px 12px; border-bottom: 1px solid var(--border); vertical-align: top; }
   tr:nth-child(even) td { background: var(--gray-light); }
   tr:hover td { background: #EBF5FB; }
 
@@ -145,9 +145,9 @@
   .info-box {
     background: #EBF5FB;
     border-left: 4px solid var(--blue);
-    padding: 12px 16px;
+    padding: 8px 14px;
     border-radius: 0 6px 6px 0;
-    margin: 16px 0;
+    margin: 10px 0;
     font-size: 10pt;
     break-inside: avoid;
     page-break-inside: avoid;
@@ -280,7 +280,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Maquettes Figma</span><span>p. 6</span></div>
+      <div class="toc-entry"><span>Maquettes Figma</span><span>p. 5</span></div>
       <ul class="toc-sub">
         <li>2.1 Maquette mobile</li>
         <li>2.2 Maquette tablette</li>
@@ -289,7 +289,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Base de données</span><span>p. 11</span></div>
+      <div class="toc-entry"><span>Base de données</span><span>p. 9</span></div>
       <ul class="toc-sub">
         <li>3.1 Modèle Conceptuel de Données (MCD)</li>
         <li>3.2 Modèle Logique de Données (MLD)</li>
@@ -297,7 +297,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Sécurité</span><span>p. 14</span></div>
+      <div class="toc-entry"><span>Sécurité</span><span>p. 12</span></div>
       <ul class="toc-sub">
         <li>4.1 Architecture de sécurité</li>
         <li>4.2 Mesures mises en place</li>
@@ -305,7 +305,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Veille sécurité</span><span>p. 18</span></div>
+      <div class="toc-entry"><span>Veille sécurité</span><span>p. 15</span></div>
       <ul class="toc-sub">
         <li>5.1 Méthodologie de veille</li>
         <li>5.2 Vulnérabilités identifiées (OWASP Top 10)</li>
@@ -313,7 +313,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Liens du projet</span><span>p. 22</span></div>
+      <div class="toc-entry"><span>Liens du projet</span><span>p. 18</span></div>
     </li>
   </ol>
 </div>
@@ -451,7 +451,7 @@
 
   <h2 class="sub-title">3.1 Modèle Conceptuel de Données (MCD)</h2>
   <p>Le cahier des charges précise les règles de gestion suivantes :</p>
-  <ul style="margin: 10px 0 16px 24px; line-height: 2;">
+  <ul style="margin: 8px 0 10px 24px; line-height: 1.6;">
     <li>Un artisan appartient à <strong>une seule spécialité</strong></li>
     <li>Une spécialité est rattachée à <strong>une seule catégorie</strong></li>
     <li>Un artisan peut recevoir <strong>plusieurs messages</strong> de contact</li>
@@ -587,7 +587,7 @@
 
   <h2 class="sub-title">4.1 Architecture de sécurité</h2>
   <p>L'application repose sur une <strong>séparation stricte entre le frontend et le backend</strong> :</p>
-  <ul style="margin: 10px 0 16px 24px; line-height: 2;">
+  <ul style="margin: 8px 0 10px 24px; line-height: 1.6;">
     <li>Le <strong>frontend React</strong> est une application statique : il ne contient aucun secret, aucune logique métier sensible, aucun accès direct à la base de données.</li>
     <li>Le <strong>backend Node.js/Express</strong> est la seule couche qui interroge MySQL. Toutes les opérations de données passent exclusivement par son API REST.</li>
     <li>La <strong>base de données MySQL</strong> n'est jamais exposée publiquement.</li>
@@ -891,7 +891,7 @@
     </tbody>
   </table>
   <p>Deux erreurs réelles ont été détectées puis corrigées durant cette validation :</p>
-  <ul style="margin: 10px 0 16px 24px; line-height: 2;">
+  <ul style="margin: 8px 0 10px 24px; line-height: 1.6;">
     <li><strong><code>&lt;main&gt;</code> imbriqué</strong> — les pages Liste des artisans et 404 plaçaient un second <code>&lt;main&gt;</code> à l'intérieur du <code>&lt;main&gt;</code> global du layout (interdit par la spec HTML5, un seul <code>&lt;main&gt;</code> visible par document). Remplacé par <code>&lt;div role="region"&gt;</code>.</li>
     <li><strong><code>aria-label</code> invalide sur <code>&lt;span&gt;</code></strong> — le badge « En vedette » portait un <code>aria-label</code> redondant avec son texte visible, interdit sur un élément de rôle générique. Attribut supprimé (le texte visible suffit pour l'accessibilité).</li>
     <li><strong>Saut de niveau de titre</strong> — sur la page 404, le <code>&lt;h1&gt;</code> était suivi directement d'un <code>&lt;h3&gt;</code> dans le pied de page (aucun <code>&lt;h2&gt;</code> intermédiaire). Les titres de colonnes du footer sont passés de <code>&lt;h3&gt;</code> à <code>&lt;h2&gt;</code>.</li>
