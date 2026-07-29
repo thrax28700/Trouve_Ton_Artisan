@@ -82,10 +82,10 @@
   .cover__footer { margin-top: auto; padding-top: 48px; font-size: 9pt; opacity: 0.6; }
 
   /* ── Sommaire ──────────────────────────────────────── */
-  .toc { padding: 40px 0; }
-  .toc h1 { font-size: 22pt; color: var(--blue-dark); border-bottom: 3px solid var(--blue); padding-bottom: 12px; margin-bottom: 32px; }
+  .toc { padding: 16px 0; }
+  .toc h1 { font-size: 20pt; color: var(--blue-dark); border-bottom: 3px solid var(--blue); padding-bottom: 8px; margin-bottom: 16px; }
   .toc ol  { list-style: none; counter-reset: toc; }
-  .toc > ol > li { counter-increment: toc; margin-bottom: 12px; break-inside: avoid; page-break-inside: avoid; }
+  .toc > ol > li { counter-increment: toc; margin-bottom: 7px; break-inside: avoid; page-break-inside: avoid; }
   .toc-entry {
     display: flex;
     justify-content: space-between;
@@ -96,8 +96,8 @@
   .toc-entry span:first-child { font-weight: 600; font-size: 11pt; color: var(--text); }
   .toc-entry span:first-child::before { content: counter(toc) ". "; color: var(--blue); }
   .toc-entry span:last-child  { font-size: 9pt; color: #999; }
-  .toc-sub { list-style: none; margin: 6px 0 0 24px; }
-  .toc-sub li { margin-bottom: 4px; font-size: 10pt; color: var(--gray); padding: 2px 0; border-bottom: 1px dotted #eee; }
+  .toc-sub { list-style: none; margin: 3px 0 0 24px; }
+  .toc-sub li { margin-bottom: 2px; font-size: 10pt; color: var(--gray); padding: 1px 0; border-bottom: 1px dotted #eee; }
 
   /* ── Sections principales ──────────────────────────── */
   .section { padding: 32px 0 24px; }
@@ -271,7 +271,7 @@
   <h1>Sommaire</h1>
   <ol>
     <li>
-      <div class="toc-entry"><span>Contexte du projet</span><span>p. 4</span></div>
+      <div class="toc-entry"><span>Contexte du projet</span><span>p. 3</span></div>
       <ul class="toc-sub">
         <li>1.1 Présentation de l'entreprise</li>
         <li>1.2 Expression des besoins</li>
@@ -280,7 +280,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Maquettes Figma</span><span>p. 7</span></div>
+      <div class="toc-entry"><span>Maquettes Figma</span><span>p. 6</span></div>
       <ul class="toc-sub">
         <li>2.1 Maquette mobile</li>
         <li>2.2 Maquette tablette</li>
@@ -289,7 +289,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Base de données</span><span>p. 12</span></div>
+      <div class="toc-entry"><span>Base de données</span><span>p. 11</span></div>
       <ul class="toc-sub">
         <li>3.1 Modèle Conceptuel de Données (MCD)</li>
         <li>3.2 Modèle Logique de Données (MLD)</li>
@@ -297,7 +297,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Sécurité</span><span>p. 15</span></div>
+      <div class="toc-entry"><span>Sécurité</span><span>p. 14</span></div>
       <ul class="toc-sub">
         <li>4.1 Architecture de sécurité</li>
         <li>4.2 Mesures mises en place</li>
@@ -305,7 +305,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Veille sécurité</span><span>p. 19</span></div>
+      <div class="toc-entry"><span>Veille sécurité</span><span>p. 18</span></div>
       <ul class="toc-sub">
         <li>5.1 Méthodologie de veille</li>
         <li>5.2 Vulnérabilités identifiées (OWASP Top 10)</li>
@@ -313,7 +313,7 @@
       </ul>
     </li>
     <li>
-      <div class="toc-entry"><span>Liens du projet</span><span>p. 23</span></div>
+      <div class="toc-entry"><span>Liens du projet</span><span>p. 22</span></div>
     </li>
   </ol>
 </div>
